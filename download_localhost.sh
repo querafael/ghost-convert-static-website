@@ -3,8 +3,8 @@
 
 echo "Downloading from $1..."
 
-mkdir -p ../ghost-static-generated
-find ../ghost-static-generated -mindepth 1 ! -iname "README.md" ! -path "*.git*" -delete
+mkdir -p dist
+find dist -mindepth 1 ! -iname "README.md" ! -path "*.git*" -delete
 
 # Download an offline copy of the local website
 wget -mkEpnp $1
@@ -20,8 +20,8 @@ echo $URLS | tr ' ' '\n' | wget -i - --wait=0.2 --random-wait -nv
 # Remove xsl reference, cos `xml unsafe attempt to load url`?
 sed -i "s/<?xml-stylesheet.*?>//" sitemap*;
 
-mv $1/* ../ghost-static-generated
-mv sitemap* ../ghost-static-generated
+mv $1/* dist
+mv sitemap* dist
 
 rm -r $1
 echo "$1 downloaded!"
