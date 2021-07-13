@@ -1,18 +1,4 @@
-read -p "Enter the domain of your localhost server(e.g. localhost:3000): " localhost
-read -p "Enter the domain of your live website(root domain only, e.g. mysite.com): " livedomain
-
-# Set default...
-if [ -z $localhost ]
-then
-  localhost="localhost:2368"
-fi
-
-if [ -z $livedomain ]
-then
-  livedomain="yaphc.com"
-fi
-
-./download_localhost.sh $localhost
+./download_localhost.sh $ghost_server_domain
 echo
 
 ./replace_query_hash_filename.sh
@@ -24,7 +10,7 @@ echo
 ./replace_http_with_https.sh
 echo
 
-./replace_localhost_with_live_site.sh $localhost $livedomain
+./replace_localhost_with_live_site.sh $ghost_server_domain $ghost_live_domain
 echo
 
 ./replace_index_html_with_root.sh
